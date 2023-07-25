@@ -1,0 +1,16 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+<div class="container">
+  <h1>Add Value</h1>
+  <h5>Variant: {{ variant.variant_name }}</h5>
+
+  <form method="post" action="{% url 'add_values' variant_id=variant.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="{% url 'variant_view' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

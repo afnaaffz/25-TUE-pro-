@@ -1,0 +1,27 @@
+{% extends "dashboard.html" %}
+{% block content %}
+    <div class="container">
+        <table class="table table-striped">
+      <thead class="thead-dark">
+                <tr>
+                    <th>SL</th>
+                    <th>Category</th>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in subcategory %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ s.category }}</td>
+                    <td>{{ s.name }}</td>
+                     <td>
+                            <a href="{% url 'subcategory_edit' s.id %}" class="btn btn-success">EDIT</a>
+                     </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

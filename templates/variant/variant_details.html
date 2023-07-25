@@ -1,0 +1,24 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+<div class="container">
+  <h4>Variant: {{ variant.variant_name }}</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>SL</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for variant_value in variant.values.all %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ variant_value.value }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'variant_view' %}" class="btn btn-secondary">Back to Variants</a>
+</div>
+{% endblock %}

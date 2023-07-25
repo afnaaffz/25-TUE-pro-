@@ -1,0 +1,41 @@
+{% extends "dashboard.html" %}
+{% block content %}
+    <div class="container">
+        <table class="table table-striped">
+      <thead class="thead-dark">
+    <tr>
+      <th>SL</th>
+                <th>Product Name</th>
+
+      <th>Category</th>
+      <th>Subcategory</th>
+      <th>Brand</th>
+      <th>Description</th>
+      <th>Image</th>
+        <th>Primary Varient</th>
+        <th>Second Variant</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in products %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+              <td>{{ product.product_name }}</td>
+
+      <td>{{ product.category }}</td>
+      <td>{{ product.subcategory }}</td>
+      <td>{{ product.brand }}</td>
+      <td>{{ product.description }}</td>
+      <td><img src="{{product.image.url}}" style="width:100px"></td>
+      <td>{{ product.primary_variant }}</td>
+      <td>{{ product.secondary_variant }}</td>
+         <td>
+             <a href="{% url 'product_edit' product.id %}" class="btn btn-success">EDIT</a>
+         </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+    </div>
+{% endblock %}

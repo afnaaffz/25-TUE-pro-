@@ -1,0 +1,41 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+    <h1>Orders</h1>
+   <table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>SL</th>
+            <th>Customer</th>
+            <th>Category</th>
+            <th>Subcategory</th>
+            <th>Brand</th>
+            <th>Product</th>
+            <th>Image</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        {% for order_item in order.order_items.all %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ order.customer }}</td>
+            <td>{{ order_item.product.category.name }}</td>
+            <td>{{ order_item.product.subcategory.name }}</td>
+            <td>{{ order_item.product.brand.name }}</td>
+            <td>{{ order_item.product.product_name }}</td>
+            <td><img src="{{ order_item.product.image.url }}" style="width:100px"></td>
+            <td>{{ order_item.quantity }}</td>
+            <td>{{ order_item.price }}</td>
+             <td>
+                 <a href="{% url 'order_edit' order.id %}" class="btn btn-success">EDIT</a>
+             </td>
+        </tr>
+        {% endfor %}
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

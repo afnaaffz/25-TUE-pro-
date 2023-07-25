@@ -1,0 +1,12 @@
+{% extends "dashboard.html" %}
+{% block content %}
+{% load crispy_forms_filters %}
+
+<h1>EDIT CARD</h1>
+<form method="post">
+    {% csrf_token %}
+    {{form|crispy}}
+    <button type="submit" class="btn btn-primary">EDIT</button>
+</form>
+
+{% endblock %}

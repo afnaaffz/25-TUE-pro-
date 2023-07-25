@@ -1,0 +1,29 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+    <div class="container">
+        <table class="table table-striped">
+      <thead class="thead-dark">
+                <tr>
+                    <th>SL</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category in categories %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ category.name }}</td>
+                        <td>{{ category.description }}</td>
+                        <td>
+                            <a href="{% url 'category_edit' category.id %}" class="btn btn-success">EDIT</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+

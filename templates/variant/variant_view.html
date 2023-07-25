@@ -1,0 +1,31 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+<div class="container">
+  <h1>Variant View</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Variant Name</th>
+        <th>Values</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for variant in variants %}
+      <tr>
+        <td>{{ variant.id }}</td>
+        <td>{{ variant.variant_name }}</td>
+        <td>
+<a href="{% url 'variant_details' variant_id=variant.id %}" class="btn btn-primary">Variant Values</a>
+          <!-- Button to edit variant -->
+          <a href="#" class="btn btn-warning">Edit</a>
+          <!-- Button to add values -->
+<a href="{% url 'add_values' variant_id=variant.id %}" class="btn btn-primary">Add Values</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

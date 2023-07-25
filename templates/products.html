@@ -1,0 +1,53 @@
+<div class="col-md-4 col-lg-2">
+    <div class="sidebar">
+        <div class="sidebar-box-2">
+            <h2 class="heading">Categories</h2>
+            <div class="fancy-collapse-panel">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    {% for category in categories %}
+                    <div class="panel-heading" role="tab" id="heading{{ forloop.counter }}">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">{{ category.name }}</a>
+                        </h4>
+                    </div>
+                    <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse {% if forloop.first %}in{% endif %}" role="tabpanel" aria-labelledby="heading{{ forloop.counter }}">
+                        <div class="panel-body">
+                            <ul>
+                                {% for subcategory in subcategories %}
+                                {% if subcategory.category == category %}
+                                <li><a href="{% url 'products_by_subcategory' subcategory_id=subcategory.id %}">{{ subcategory.name }}</a></li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-8 col-lg-10">
+    <div class="products">
+        {% if products %}
+        <h2>Products</h2>
+        <ul>
+            {% for product in products %}
+            <li>
+                <h3>{{ product.product_name }}</h3>
+                <p>Category: {{ product.category.name }}</p>
+                <p>Subcategory: {{ product.subcategory.name }}</p>
+                <p>Brand: {{ product.brand.name }}</p>
+                <p>Description: {{ product.description }}</p>
+                <p>Price: ${{ product.price }}</p>
+                <img src="{{ product.image.url }}" alt="{{ product.product_name }}">
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No products found.</p>
+        {% endif %}
+    </div>
+</div>
+

@@ -1,0 +1,56 @@
+{% extends "dashboard.html" %}
+{% block content %}
+{% load crispy_forms_filters %}
+
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-dismissible alert-danger">
+      <button type="button" class="close" data-dismiss="alert">
+        ×
+      </button>
+      <strong><i class="fas fa-exclamation-triangle"></i> {{ message }}</strong>
+    </div>
+  {% endfor %}
+{% endif %}
+
+
+<div class="container">
+  <h1 class="mb-4"><u>Customer Address</u></h1>
+  <div class="row justify-content-left">
+    <div class="col-md-6">
+      <form method="POST" action="{% url 'customer_address_add' %}">
+        {% csrf_token %}
+        <div class="form-group">
+  <label for="customer">Customer:</label>
+  <select class="form-control" name="customer" id="customer">
+    {% for customer in customers %}
+      <option value="{{ customer.id }}">{{ customer.name }}</option>
+    {% endfor %}
+  </select>
+</div>
+
+        <div class="form-group">
+          <label for="address">Address:</label>
+          <textarea class="form-control" name="address" id="address" rows="4" cols="50"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="pincode">Pincode:</label>
+          <input type="text" class="form-control" name="pincode" id="pincode" required>
+        </div>
+       <div class="form-group">
+    <label for="phone_no">Phone Number:</label>
+    <input type="text" class="form-control" name="phone_no" id="phone_no" required>
+    {% if form.phone_no.errors %}
+        <span class="text-danger">{{ form.phone_no.errors }}</span>
+    {% endif %}
+    <small class="form-text text-muted">Please enter a 10-digit phone number.</small>
+</div>
+
+
+        <button type="submit" class="btn btn-primary">Add</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
